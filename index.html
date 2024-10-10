@@ -1,0 +1,119 @@
+<!-- ANGIE XIMENA OLVERA ALVAREZ -->
+<!-- ACTIVIDAD 13 CONVERTIDOR DE UNIDADES -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Convertidor de Unidades</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f4f7;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .converter {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 350px;
+            width: 100%;
+        }
+        h2 {
+            color: #28c908;
+            margin-bottom: 20px;
+        }
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        p {
+            font-size: 18px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+        span {
+            color: #28a745;
+        }
+    </style>
+</head>
+<body>
+    <div class="converter">
+        <h2>Conversor de Unidades</h2>
+        <input type="number" id="inputValue" placeholder="Ingresa un valor">
+        <select id="inputUnit">
+            <option value="meters">Metros</option>
+            <option value="kilometers">Kilómetros</option>
+            <option value="miles">Millas</option>
+        </select>
+        <select id="outputUnit">
+            <option value="meters">Metros</option>
+            <option value="kilometers">Kilómetros</option>
+            <option value="miles">Millas</option>
+        </select>
+        <p>Resultado: <span id="outputValue">0</span></p>
+    </div>
+
+    <script>
+        const inputValue = document.getElementById('inputValue');
+        const inputUnit = document.getElementById('inputUnit');
+        const outputUnit = document.getElementById('outputUnit');
+        const outputValue = document.getElementById('outputValue');
+
+        inputValue.addEventListener('input', convert);
+        inputUnit.addEventListener('change', convert);
+        outputUnit.addEventListener('change', convert);
+
+        function convert() {
+            const value = parseFloat(inputValue.value);
+            if (isNaN(value)) {
+                outputValue.textContent = '0';
+                return;
+            }
+
+            const inputUnitValue = inputUnit.value;
+            const outputUnitValue = outputUnit.value;
+
+            let meters;
+
+            switch (inputUnitValue) {
+                case 'meters':
+                    meters = value;
+                    break;
+                case 'kilometers':
+                    meters = value * 1000;
+                    break;
+                case 'miles':
+                    meters = value * 1609.34;
+                    break;
+            }
+
+            let result;
+
+            switch (outputUnitValue) {
+                case 'meters':
+                    result = meters;
+                    break;
+                case 'kilometers':
+                    result = meters / 1000;
+                    break;
+                case 'miles':
+                    result = meters / 1609.34;
+                    break;
+            }
+
+            outputValue.textContent = result.toFixed(2);
+        }
+    </script>
+</body>
+</html>
